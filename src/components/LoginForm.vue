@@ -67,14 +67,12 @@ export default {
     const handleLogin = (formName:string) => {
       ctx.$refs[formName].validate((valid:boolean) => {
         if (valid) {
-          console.log(props.loginUser)
           axios({
             method: 'POST',
-            url: 'http://localhost:8009/user/loginWithPassword',
+            url: 'http://localhost:9901/user/loginWithPassword',
             data: props.loginUser
           }).then((res:any) => {
-            console.log('success')
-            router.push('/')
+            router.push('/console/index')
           })
         } else {
           console.log('error submit!!')

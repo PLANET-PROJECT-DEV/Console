@@ -76,13 +76,12 @@ export default {
       })
     }
     // 触发验证码
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const handleSendCode = (formName: string) => {
       ctx.$refs[formName].validate((valid: boolean) => {
         if (valid) {
           axios({
             method: 'POST',
-            url: 'http://localhost:8009/user/loginWithPassword',
+            url: 'http://localhost:9901/user/loginWithPassword',
             data: props.registerUser
           }).then((res:any) => {
             console.log('success')

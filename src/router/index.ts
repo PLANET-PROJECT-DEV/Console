@@ -15,6 +15,28 @@ const routes = [
     path: '/:catchAll',
     name: '/404',
     component: () => import('../views/404.vue')
+  },
+  {
+    path: '/console/index',
+    name: 'consoleIndex',
+    component: () => import('../views/Console.vue'),
+    children: [
+      {
+        path: '/console/index',
+        name: 'consoleIndex',
+        component: () => import('../views/ConsoleIndex.vue')
+      },
+      {
+        path: '/console/management',
+        name: 'consoleManagement',
+        component: () => import('../views/ConsoleManagement.vue')
+      },
+      {
+        path: '/console/setup',
+        name: 'consoleSetup',
+        component: () => import('../views/ConsoleSetup.vue')
+      }
+    ]
   }
 ]
 

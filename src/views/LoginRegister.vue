@@ -61,7 +61,7 @@
   </div>
 </template>
 <script lang="ts">
-import { getCurrentInstance, ref } from 'vue'
+import { ref } from 'vue'
 import { loginUser, rules } from '@/utils/loginVaildators'
 import { registerUser, registerRules } from '@/utils/RegisterVaildators'
 import LoginForm from '@/components/LoginForm.vue'
