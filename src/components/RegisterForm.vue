@@ -28,7 +28,7 @@
       <el-button
         type="primary"
         class="submit_btn"
-        @click="handleSendCode('registerForm')"
+        @click="handleSendCode()"
       >
         发送
       </el-button>
@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { getCurrentInstance, ref } from 'vue'
+import { getCurrentInstance } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -63,12 +63,19 @@ export default {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const { ctx } = getCurrentInstance()
-    // 触发注册
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    // 触发注册登录
     const handleRegister = (formName: string) => {
       ctx.$refs[formName].validate((valid: boolean) => {
         if (valid) {
-          alert('submit!')
+          axios({
+            method: 'POST',
+            url: 'http://localhost:9901/user/login',
+            data: props.registerUser
+          }).then((res:any) => {
+            console.log('success')
+            console.log(res)
+            router.push('/console/index')
+          })
         } else {
           console.log('error submit!!')
           return false
@@ -76,21 +83,11 @@ export default {
       })
     }
     // 触发验证码
-    const handleSendCode = (formName: string) => {
-      ctx.$refs[formName].validate((valid: boolean) => {
-        if (valid) {
-          axios({
-            method: 'POST',
-            url: 'http://localhost:9901/user/loginWithPassword',
-            data: props.registerUser
-          }).then((res:any) => {
-            console.log('success')
-            router.push('/')
-          })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
+    const handleSendCode = () => {
+      axios({
+        method: 'POST',
+        url: 'http://localhost:9901/user/code',
+        data: props.registerUser
       })
     }
     return { handleRegister, handleSendCode }

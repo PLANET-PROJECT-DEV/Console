@@ -72,6 +72,7 @@ export default {
             url: 'http://localhost:9901/user/loginWithPassword',
             data: props.loginUser
           }).then((res:any) => {
+            console.log(res)
             router.push('/console/index')
           })
         } else {
